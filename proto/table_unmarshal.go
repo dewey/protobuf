@@ -1,7 +1,7 @@
 // Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2016 The Go Authors.  All rights reserved.
-// https://github.com/golang/protobuf
+// https://github.com/dewey/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -1288,7 +1288,7 @@ func unmarshalBoolValue(b []byte, f pointer, w int) ([]byte, error) {
 	}
 	// Note: any length varint is allowed, even though any sane
 	// encoder will use one byte.
-	// See https://github.com/golang/protobuf/issues/76
+	// See https://github.com/dewey/protobuf/issues/76
 	x, n := decodeVarint(b)
 	if n == 0 {
 		return nil, io.ErrUnexpectedEOF
@@ -1808,12 +1808,14 @@ func makeUnmarshalMap(f *reflect.StructField) unmarshaler {
 
 // makeUnmarshalOneof makes an unmarshaler for oneof fields.
 // for:
-// message Msg {
-//   oneof F {
-//     int64 X = 1;
-//     float64 Y = 2;
-//   }
-// }
+//
+//	message Msg {
+//	  oneof F {
+//	    int64 X = 1;
+//	    float64 Y = 2;
+//	  }
+//	}
+//
 // typ is the type of the concrete entry for a oneof case (e.g. Msg_X).
 // ityp is the interface type of the oneof field (e.g. isMsg_F).
 // unmarshal is the unmarshaler for the base type of the oneof case (e.g. int64).
